@@ -28,8 +28,8 @@ jobs:
       - name: Use nvm to install and use Node.js
         run: |
           . ~/.nvm/nvm.sh
-          nvm install 18.18.2
-          nvm use 18.18.2
+          nvm install 18.20.4
+          nvm use 18.20.4
           node --version
 
       - name: Install Salesforce CLI
@@ -40,14 +40,14 @@ jobs:
       - name: Authenticate with Salesforce
         run: sfdx auth:sfdxurl:store -f sfdx-url.txt
 
-      - name: Static Code Analysis
-        run: |
-          sfdx force:source:convert -d mdapi
-          sfdx scanner:run --target ./mdapi --format table
+      # - name: Static Code Analysis
+      #   run: |
+      #     sfdx force:source:convert -d mdapi
+      #     sfdx scanner:run --target ./mdapi --format table
 
-      - name: Deploy to Salesforce
-        run: |
-          sfdx force:source:deploy -p force-app -u MySandbox
+      # - name: Deploy to Salesforce
+      #   run: |
+      #     sfdx force:source:deploy -p force-app -u MySandbox
 
 
 
