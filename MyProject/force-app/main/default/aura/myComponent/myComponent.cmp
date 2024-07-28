@@ -1,0 +1,7 @@
+<aura:component controller="MessageController">
+    <aura:attribute name="message" type="String" />
+    <lightning:button label="Click Me" onclick="{!c.myAction}" />
+    <aura:if isTrue="{!not(empty(v.message))}">
+        <p>{!v.message}</p>
+    </aura:if>
+</aura:component>
