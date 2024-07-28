@@ -12,11 +12,12 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
+env:
+  dependencies_path: ~/.cache
+  runs_on: ubuntu-latest
 jobs:
   setup-environment:
-    runs-on: ubuntu-latest
-
+    runs-on: ${{ env.runs_on }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -55,7 +56,7 @@ jobs:
   #  "build" job
   build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: ${{ env.runs_on }}
     needs: setup-environment
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -76,7 +77,7 @@ jobs:
           sfdx scanner:run --target ./mdapi --format table
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ${{ env.runs_on }}
     needs: [setup-environment, build]
 
     steps:
@@ -86,7 +87,7 @@ jobs:
     - name: Restore cached dependencies
       uses: actions/cache@v3
       with:
-        path: ${{ env.dependencies-path }}
+        path: ${{ env.dependencies_path }}
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
     - name: Deploy to Salesforce
