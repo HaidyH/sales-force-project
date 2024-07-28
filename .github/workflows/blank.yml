@@ -25,13 +25,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18.18.2'
+      - name: Use nvm to install and use Node.js
+        run: |
+          . ~/.nvm/nvm.sh
+          nvm install 18.18.2
+          nvm use 18.18.2
+          node --version
 
       - name: Install Salesforce CLI
-        run: npm install -g sfdx-cli
+        run: |
+          npm install -g sfdx-cli
+          sfdx -v
 
       - name: Authenticate with Salesforce
         run: sfdx auth:sfdxurl:store -f sfdx-url.txt
