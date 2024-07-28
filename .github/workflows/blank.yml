@@ -40,10 +40,11 @@ jobs:
       - name: Authenticate with Salesforce
         run: sfdx auth:sfdxurl:store -f sfdx-url.txt
 
-      # - name: Static Code Analysis
-      #   run: |
-      #     sfdx force:source:convert -d mdapi
-      #     sfdx scanner:run --target ./mdapi --format table
+      - name: Static Code Analysis
+        run: |
+          cd MyProject
+          sfdx force:source:convert -d mdapi
+          sfdx scanner:run --target ./mdapi --format table
 
       # - name: Deploy to Salesforce
       #   run: |
