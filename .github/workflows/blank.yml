@@ -13,7 +13,7 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 env:
-  dependencies_path: ~/.cache
+  dependencies_path: ~/.npm
   runs_on: ubuntu-latest
   
 jobs:
