@@ -24,6 +24,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Debug - List files
+        run: ls -R
+
       - name: Cache npm dependencies
         uses: actions/cache@v2
         with:
