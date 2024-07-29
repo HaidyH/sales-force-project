@@ -89,7 +89,10 @@ jobs:
     - name: Restore cached dependencies
       uses: actions/cache@v3
       with:
-        path: ${{ env.dependencies_path }}
+        path: |
+          /usr/local/lib/node_modules
+          ~/.npm
+          /usr/local/bin
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
     - name: Deploy to Salesforce
