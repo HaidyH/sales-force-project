@@ -24,12 +24,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Cache dependencies
-        uses: actions/cache@v3
+      - name: Cache npm dependencies
+        uses: actions/cache@v2
         with:
-          path: |
-            ~/.cache
-            **/node_modules
+          path: '~/.npm'
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
