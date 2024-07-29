@@ -48,8 +48,9 @@ jobs:
           sfdx -v
 
       - name: Authenticate with Salesforce
-        run: sfdx auth:sfdxurl:store -f sfdx-url.txt
-
+        env:
+          SALESFORCE_AUTH_URL: ${{ secrets.SALESFORCE_AUTH_URL }}
+        run: echo "${SALESFORCE_AUTH_URL}" > sfdx-url.txt && sfdx auth:sfdxurl:store -f sfdx-url.txt
   #  "build" job
   build:
     # The type of runner that the job will run on
