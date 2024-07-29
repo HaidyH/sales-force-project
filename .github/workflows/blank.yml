@@ -16,8 +16,9 @@ env:
   dependencies_path: ~/.cache
   runs_on: ubuntu-latest
 jobs:
-  setup-environment:
-    runs-on: ${{ env.runs_on }}
+  setup:
+    name: Setup Environment
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -56,8 +57,9 @@ jobs:
   #  "build" job
   build:
     # The type of runner that the job will run on
-    runs-on: ${{ env.runs_on }}
-    needs: setup-environment
+    name: build
+    runs-on: ubuntu-latest
+    needs: setup
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -77,8 +79,9 @@ jobs:
           sfdx scanner:run --target ./mdapi --format table
 
   deploy:
-    runs-on: ${{ env.runs_on }}
-    needs: [setup-environment, build]
+    name: deploy
+    runs-on: ubuntu-latest
+    needs: [setup, build]
 
     steps:
     - name: Checkout repository
