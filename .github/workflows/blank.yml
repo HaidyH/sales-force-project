@@ -24,9 +24,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Debug - List files
-        run: ls -R
-
       - name: Cache npm dependencies
         uses: actions/cache@v2
         with:
@@ -44,7 +41,7 @@ jobs:
 
       - name: Install Salesforce CLI
         run: |
-          npm install sfdx-cli
+          npm install -g sfdx-cli
           sfdx -v
       
       - name: Debug - List files
