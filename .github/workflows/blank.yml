@@ -48,12 +48,6 @@ jobs:
       - name: Authenticate with Salesforce
         run: sfdx auth:sfdxurl:store -f sfdx-url.txt
 
-      - name: Save installed dependencies
-        uses: actions/github-script@v6
-        with:
-          script: |
-            core.exportVariable('dependencies_path', '~/.cache')
-
   #  "build" job
   build:
     # The type of runner that the job will run on
